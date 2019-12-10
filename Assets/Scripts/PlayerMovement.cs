@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-    public float speed = 9f;
+    public float walkSpeed = 6f;
+    public float runSpeed = 12f;
     public float gravity = -35f;
     public float groundDst = 0.4f;
     public float jumpHeight = 2f;
@@ -14,6 +15,8 @@ public class PlayerMovement : MonoBehaviour {
 
     Vector3 velocity;
     bool isGrounded;
+    float speed = 6f;
+    bool isRunning = false;
 
     // Update is called once per frame
     void Update() {
@@ -26,6 +29,12 @@ public class PlayerMovement : MonoBehaviour {
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
+
+        // Check for running
+        if (Input.GetButtonDown("Shift")) {
+            SetWalkRunSpeed();
+        }
+
         // Transforms for local system instead of global 
         Vector3 moveDst = transform.right * x + transform.forward * z;
         controller.Move(moveDst * speed * Time.deltaTime);
@@ -37,5 +46,16 @@ public class PlayerMovement : MonoBehaviour {
         // Apply gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    // Sets inversed speed to current speed
+    void SetWalkRunSpeed() {
+        if (isRunning) {
+            speed = walkSpeed;
+            isRunning = false;
+        } else {
+            speed = runSpeed;
+            isRunning = true;
+        }
     }
 }
