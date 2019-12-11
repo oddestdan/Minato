@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class Player : MonoBehaviour {
     public float walkSpeed = 6f;
     public float runSpeed = 12f;
     public float gravity = -35f;
