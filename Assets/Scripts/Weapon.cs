@@ -16,6 +16,7 @@ public class Weapon : MonoBehaviour {
 
             Projectile newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation) as Projectile;
             newProjectile.SetSpeed(muzzleVelocity);
+            Destroy(newProjectile.gameObject, 1f);
         }
     }
 
